@@ -12,7 +12,7 @@ const yargs = require('yargs')
 
 /// From Own Module
 
-// const myObj = require('./notes.js')
+const myObj = require('./notes.js')
 
 // console.log(__filename)
 // console.log(__dirname)
@@ -46,10 +46,13 @@ yargs.command({
         }
     },
     handler: function(argv){
-        const str = argv.title + ". " + argv.body
-        fs.writeFileSync('hello.txt', str)
-        console.log(argv.title)
-        console.log(argv.body)
+        
+        myObj.addNotes(argv.title, argv.body)
+
+        // const str = argv.title + ". " + argv.body
+        // fs.writeFileSync('hello.txt', str)
+        // console.log(argv.title)
+        // console.log(argv.body)
     }
 })
 
