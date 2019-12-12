@@ -1,6 +1,6 @@
 /// From Node Core Module
 
-// const fs = require('fs')
+const fs = require('fs')
 // const path = require('path')
 // const os = require('os')
 
@@ -8,6 +8,7 @@
 
 const validator = require('validator')
 const chalk = require('chalk')
+const yargs = require('yargs')
 
 /// From Own Module
 
@@ -29,14 +30,27 @@ const chalk = require('chalk')
 
 // console.log('Welcome ' + chalk.green(process.argv[2]))
 
-const command = process.argv[2]
+yargs.command({
+    command: 'add',
+    describe: 'add new note',
+    builder: {
+        title: {
+            describe: 'note title',
+            demandOption: true,
+            type: 'string'
+        },
+        body: {
+            describe: 'note body',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function(argv){
+        const str = argv.title + ". " + argv.body
+        fs.writeFileSync('hello.txt', str)
+        console.log(argv.title)
+        console.log(argv.body)
+    }
+})
 
-if (command === 'add'){
-    console.log(chalk.green('Note Is Added'))
-}
-else if (command === 'remove') {
-    console.log(chalk.red('Note Is removed'))
-}
-else {
-    console.log(chalk.blue('Nothing'))
-}
+yargs.parse()
