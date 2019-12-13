@@ -90,7 +90,7 @@ yargs.command({
         }
     },
     handler: function(argv){
-        console.log(argv.title)
+        myObj.readNote(argv.title)
     }
 })
 

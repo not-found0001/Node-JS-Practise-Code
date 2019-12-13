@@ -1,4 +1,5 @@
 const fs = require('fs')
+const chalk = require('chalk')
 
 // const name = "MK"
 
@@ -33,7 +34,7 @@ const removeNote = function(title){
     })
 
     if(Notes.length === notes.length){
-        console.log("This Note Are Not Available.")
+        console.log(chalk.red.inverse("This Note Are Not Available."))
     }
     else{
         saveNotes(Notes)
@@ -47,6 +48,21 @@ const listNotes = () => {
         console.log(note.title)
         console.log(note.body)
     });
+}
+
+const readNote = (title) => {
+    const notes = loadNotes()
+    const note = notes.find( (note) => {
+        return note.title === title
+    })
+
+    if(note){
+        console.log(note.title)
+        console.log(note.body)
+    }
+    else{
+        console.log("Note Not Found")
+    }
 }
 
 const saveNotes = function(notes){
@@ -66,7 +82,8 @@ const loadNotes = function(){
 module.exports = {
     addNotes,
     removeNote,
-    listNotes
+    listNotes,
+    readNote
 }
 
 
