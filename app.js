@@ -56,4 +56,42 @@ yargs.command({
     }
 })
 
+yargs.command({
+    command: 'remove',
+    describe: 'remove note',
+    builder: {
+        title: {
+            describe: 'note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function(argv){
+        myObj.removeNote(argv.title)
+    }
+})
+
+yargs.command({
+    command: 'list',
+    describe: 'list note',
+    handler: function(){
+        myObj.listNotes()
+    }
+})
+
+yargs.command({
+    command: 'read',
+    describe: 'read note',
+    builder: {
+        title: {
+            describe: 'note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function(argv){
+        console.log(argv.title)
+    }
+})
+
 yargs.parse()

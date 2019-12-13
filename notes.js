@@ -13,7 +13,7 @@ const addNotes = function(title, body){
     })
 
     if(duplicateNotes.length === 0){
-        notes.push({
+        notes.push({ 
             title: title,
             body: body
         })
@@ -24,6 +24,29 @@ const addNotes = function(title, body){
     else{
         console.log('Note Already Taken.')
     }
+}
+
+const removeNote = function(title){
+    const notes = loadNotes()
+    const Notes = notes.filter((note) => {
+        return note.title !== title;
+    })
+
+    if(Notes.length === notes.length){
+        console.log("This Note Are Not Available.")
+    }
+    else{
+        saveNotes(Notes)
+        console.log("This Note Are Removed")
+    }
+}
+
+const listNotes = () => {
+    const notes = loadNotes()
+    notes.forEach( (note) => {
+        console.log(note.title)
+        console.log(note.body)
+    });
 }
 
 const saveNotes = function(notes){
@@ -41,7 +64,9 @@ const loadNotes = function(){
 }
 
 module.exports = {
-    addNotes
+    addNotes,
+    removeNote,
+    listNotes
 }
 
 
